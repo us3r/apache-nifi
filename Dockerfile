@@ -12,7 +12,7 @@ ARG     VERSION=1.1.1
 # Create Environment, install depedencies
 
 RUN     apk update && apk add --upgrade bash curl && \
-        mkdir -p $NIFI_HOME/{database_repositories,flowfile_repositories,content_repostory,provenance_repository} && \
+        bash -c "mkdir -p $NIFI_HOME/{database_repositories,flowfile_repositories,content_repostory,provenance_repository}" && \
         curl ${DIST_MIRROR}/${VERSION}/nifi-${VERSION}-bin.tar.gz | tar xvz -C ${NIFI_HOME} && \
         mv ${NIFI_HOME}/nifi-${VERSION}/* ${NIFI_HOME} && \
         rm -rf ${NIFI_HOME}/nifi-${VERSION} && \

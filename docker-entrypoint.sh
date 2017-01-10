@@ -7,7 +7,7 @@ function set_nifi_properties()  {
     for property in $(env | grep -i NIFI_ | grep -v HOME); do 
         key=$(echo $property | cut -f1 -d= | sed -e 's/_/./g' | tr A-Z a-z)
         value=$(eval echo $property | cut -f2 -d=)
-        sed -e "s/$key=.*/$key=$value/" -i $NIFI_HOME/conf/nifi.properties
+        sed -e "s~$key=.*~$key=$value~" -i $NIFI_HOME/conf/nifi.properties
     done
     IFS=$SAVEIFS
 }

@@ -15,7 +15,7 @@ function set_nifi_properties()  {
 function set_java() {
    JAVA_MS=${JAVA_MS:=1024}
    JAVA_MX=${JAVA_MX:=1024}
-   sed -e "s/Xms.*/Xms${JAVA_MS}m/" -e "s/Xms.*/Xms${JAVA_MX}m/" -i $NIFI_HOME/conf/bootsrap.conf
+   sed -e "s/Xms.*/Xms${JAVA_MS}m/" -e "s/Xms.*/Xms${JAVA_MX}m/" -i $NIFI_HOME/conf/bootstrap.conf
 }
 
 function set_hdfs() {

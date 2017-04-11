@@ -7,7 +7,7 @@ ENV     NIFI_HOME   /opt/nifi
 
 # ARGS
 ARG     DIST_MIRROR=http://mirror.cc.columbia.edu/pub/software/apache/nifi
-ARG     VERSION=1.1.1
+ARG     VERSION=1.1.2
 
 # Create Environment, install depedencies
 
@@ -26,6 +26,8 @@ COPY    docker-entrypoint.sh /
 VOLUME  ["${NIFI_HOME}/logs","${NIFI_HOME}/flowfile_repositories","${NIFI_HOME}/content_repostory","${NIFI_HOME}/provenance_repository","${NIFI_HOME}/database_repositories"]
 
 WORKDIR ${NIFI_HOME}
+
+EXPOSE 8080 8081 8443
 
 ENTRYPOINT      ["/docker-entrypoint.sh"]
 CMD             ["/opt/nifi/bin/nifi.sh", "run"]

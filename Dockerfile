@@ -6,7 +6,7 @@ MAINTAINER Mariusz Derela <mariusz.derela@gmail.com>
 ENV     NIFI_HOME   /opt/nifi
 
 # ARGS
-ARG     DIST_MIRROR=http://mirror.cc.columbia.edu/pub/software/apache/nifi
+ARG     DIST_MIRROR=http://ftp.piotrkosoft.net/pub/mirrors/ftp.apache.org/nifi
 ARG     VERSION=1.1.2
 
 # Create Environment, install depedencies

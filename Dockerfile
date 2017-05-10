@@ -7,12 +7,12 @@ ENV     NIFI_HOME   /opt/nifi
 
 # ARGS
 ARG     DIST_MIRROR=http://ftp.piotrkosoft.net/pub/mirrors/ftp.apache.org/nifi
-ARG     VERSION=1.1.2
+ARG     VERSION=1.2.0
 
 # Create Environment, install depedencies
 
-RUN     apk update && apk add --upgrade bash curl && \
-        bash -c "mkdir -p $NIFI_HOME/{database_repositories,flowfile_repositories,content_repostory,provenance_repository}" && \
+RUN     apk update && apk add --upgrade bash curl bind-tools && \
+        bash -c "mkdir -p $NIFI_HOME/{flowfile_repository,database_repository,content_repository,provenance_repository}" && \
         curl ${DIST_MIRROR}/${VERSION}/nifi-${VERSION}-bin.tar.gz | tar xvz -C ${NIFI_HOME} && \
         mv ${NIFI_HOME}/nifi-${VERSION}/* ${NIFI_HOME} && \
         rm -rf ${NIFI_HOME}/nifi-${VERSION} && \
@@ -23,9 +23,8 @@ RUN     apk update && apk add --upgrade bash curl && \
 COPY    docker-entrypoint.sh /
 
 
-VOLUME  ["${NIFI_HOME}/logs","${NIFI_HOME}/flowfile_repositories","${NIFI_HOME}/content_repostory","${NIFI_HOME}/provenance_repository","${NIFI_HOME}/database_repositories"]
-
 WORKDIR ${NIFI_HOME}
+VOLUME ["${NIFI_HOME}/flowfile_repository", "${NIFI_HOME}/database_repository", "${NIFI_HOME}/content_repository", "${NIFI_HOME}/provenance_repository"]
 
 EXPOSE 8080 8081 8443
 

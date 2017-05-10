@@ -19,13 +19,15 @@ function set_java() {
 }
 
 function set_hdfs() {
- if [ $HDFS ]; then
-   HDFS_URI=${HDFS_URI:=http://hdfs.marathon.mesos:9000/v1/connection}
-   mkdir -p $NIFI_HOME/hdfs
-   wget -O $NIFI_HOME/hdfs/core-site.xml $HDFS_URI/core-site.xml
-   wget -O $NIFI_HOME/hdfs/hdfs-site.xml $HDFS_URI/hdfs-site.xml
+ if [ ${HDFS_SERVICE_NAME} ]; then
+  mkdir -p $NIFI_HOME/hdfs
+  API_PORT=$(dig _${HDFS_SERVICE_NAME}._tcp.marathon.mesos SRV +short | cut -d " " -f 3)
+  wget -O $NIFI_HOME/hdfs/core-site.xml "${HDFS_SERVICE_NAME}.marathon.mesos:${API_PORT}/v1/endpoints/core-site.xml"
+  wget -O $NIFI_HOME/hdfs/hdfs-site.xml "${HDFS_SERVICE_NAME}.marathon.mesos:${API_PORT}/v1/endpoints/hdfs-site.xml"
  fi
 }
+
+
 
 set_nifi_properties
 set_java

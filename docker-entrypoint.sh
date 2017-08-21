@@ -36,9 +36,9 @@ function set_cluster() {
        -e "s/nifi.web.http.host=.*/nifi.web.http.host=${HOST}/" \
        -e "s/nifi.remote.input.host=.*/nifi.remote.input.host=${HOST}/" \
        -e "s/nifi.cluster.node.address=.*/nifi.cluster.node.address=${HOST}/" \
-       -e "s/nifi.web.http.port=.*/nifi.web.http.port=${PORT0}" \
-       -e "s/nifi.remote.http.port=.*/nifi.web.http.port=${PORT1}" \
-       -e "s/nifi.cluster.node.protocol.port=.*/nifi.cluster.node.protocol.port=${PORT2}" \
+       -e "s/nifi.web.http.port=.*/nifi.web.http.port=${PORT0}/" \
+       -e "s/nifi.remote.http.port=.*/nifi.web.http.port=${PORT1}/" \
+       -e "s/nifi.cluster.node.protocol.port=.*/nifi.cluster.node.protocol.port=${PORT2}/" \
    -i $NIFI_HOME/conf/nifi.properties
  fi
 }

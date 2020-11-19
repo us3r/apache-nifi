@@ -7,7 +7,7 @@ ENV     NIFI_HOME   /opt/nifi
 
 # ARGS
 ARG     DIST_MIRROR=http://ftp.man.poznan.pl/apache/nifi
-ARG     VERSION=1.11.4
+ARG     VERSION=1.12.1
 
 # Create Environment, install depedencies
 

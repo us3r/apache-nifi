@@ -6,17 +6,18 @@ MAINTAINER Mariusz Derela <mariusz.derela@gmail.com>
 ENV     NIFI_HOME   /opt/nifi
 
 # ARGS
-ARG     DIST_MIRROR=http://ftp.man.poznan.pl/apache/nifi
-ARG     VERSION=1.13.0
+ARG     DIST_MIRROR=https://dlcdn.apache.org/nifi
+ARG     VERSION=1.19.1
 
 # Create Environment, install depedencies
 
 RUN     apk update && apk add --upgrade bash curl bind-tools && \
         bash -c "mkdir -p $NIFI_HOME/{flowfile_repository,database_repository,content_repository,provenance_repository}" && \
-        curl ${DIST_MIRROR}/${VERSION}/nifi-${VERSION}-bin.tar.gz | tar xvz -C ${NIFI_HOME} && \
+        curl -O ${DIST_MIRROR}/${VERSION}/nifi-${VERSION}-bin.zip && \
+        unzip nifi-${VERSION}-bin.zip -d ${NIFI_HOME} && \
         mv ${NIFI_HOME}/nifi-${VERSION}/* ${NIFI_HOME} && \
         rm -rf ${NIFI_HOME}/nifi-${VERSION} && \
-        rm -rf *.tar.gz && \
+        rm -rf *.zip && \
         apk del curl && \
         rm -rf /var/cache/apk/*
 
